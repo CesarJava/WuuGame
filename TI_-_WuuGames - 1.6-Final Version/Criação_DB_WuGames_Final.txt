@@ -1,0 +1,204 @@
+Drop database if exists db_WuGames;
+Create database db_WuGames;
+use db_WuGames;
+
+Create table tb_Interesse
+(
+	Inte_Id int(8) not null auto_increment,
+	Inte_Nome varchar(100) not null,
+	Primary key (Inte_Id)
+);
+
+insert into tb_Interesse values(0,'Xbox360');
+insert into tb_Interesse values(0,'PS3');
+
+Create table tb_Imagem
+(
+	Img_Id int(8) not null auto_increment,
+	Img_Nome varchar(100),
+	Primary Key (Img_Id)
+);
+
+insert into tb_Imagem values(0,'Img1');
+insert into tb_Imagem values(0,'Img2');
+
+Create table tb_Usuario
+(
+	User_Id int(8) not null auto_increment,
+	User_Nome varchar(100) not null,
+	User_Login varchar(100) not null unique key,
+	User_Senha varchar(100) not null,
+	User_Email varchar(100) not null unique key,
+	User_RG varchar(9) not null unique key,
+	User_CPF varchar(11) unique key,
+	User_DataNasc date not null,
+	User_Pontos int default 0,
+	Img_Id int(8) not null,
+	User_Advertencias int(1) default 0,
+	Foreign key (Img_Id) references tb_Imagem(Img_Id),
+	Primary Key (User_Id)
+);
+
+insert into tb_Usuario values(0,'Daniel','Kraton','123','dani@gmail.com','123456789','12345678901','1996-02-01',100,1,0);
+insert into tb_Usuario values(0,'Cesar','Cesaros','321','cesar@gmail.com','987654321','10987654321','1995-08-10',100,2,0);
+
+Create table tb_TipoMensagem
+(
+	TpMsg_Id int(8) not null auto_increment,
+	TpMsg_Nome varchar(100) not null,
+	Primary Key (TpMsg_Id)
+);
+
+insert into tb_TipoMensagem values(0,'Privativa');
+insert into tb_TipoMensagem values(0,'Negociacao');
+
+Create table tb_Mensagem
+(
+	Msg_Id int(8) not null auto_increment,
+	User_1 int(8) not null,
+	User_2 int(8) not null,
+	TpMsg_Id int(8) not null,
+	Msg_Ast varchar(100) not null,
+	Msg_Texto text not null,
+	Foreign Key (User_1) references tb_Usuario(User_Id),
+	Foreign Key (User_2) references tb_Usuario(User_Id),	
+	Foreign Key (TpMsg_Id) references tb_TipoMensagem(TpMsg_Id),
+	Primary Key (Msg_Id)
+);
+
+Create table tb_Assunto
+(
+	Ast_Id int(8) not null auto_increment,
+	Ast_Nome varchar(100) not null,
+	Primary key (Ast_Id)
+);
+
+insert into tb_Assunto values(0,'Dicas');
+insert into tb_Assunto values(0,'Detonado');
+
+Create table tb_Genero
+(
+	Gen_Id int(8) not null auto_increment,
+	Gen_Nome varchar(100) not null,
+	Primary Key (Gen_Id)
+);
+
+insert into tb_Genero values(0,'Aventura');
+insert into tb_Genero values(0,'RPG');
+
+Create table tb_Postagem
+(
+	Post_Id int(8) not null auto_increment,
+	User_Id int(8) not null,
+	Post_Titulo varchar(100) not null unique key,
+	Post_Subtitulo varchar(200) not null,
+	Post_Conteudo varchar(25000) not null,
+	Post_VotoPos int default 0,
+	Post_VotoNeg int default 0,
+	Post_Data datetime not null,
+	Img_Id int(8) not null,
+	Foreign Key (User_id) references tb_Usuario(User_Id),
+	Foreign key (Img_Id) references tb_Imagem(Img_Id),
+	Primary key (Post_id)
+);
+
+insert into tb_Postagem values(0,1,'Post 1','Primeiro Post','Este é o primeiro post',7,1,'2011-11-21',1);
+insert into tb_Postagem values(0,2,'Post 2','Segundo Post','Este é o segundo post',6,4,'2011-11-21',1);
+
+Create table tb_InterGen
+(
+	Post_Id int(8) not null,
+	Gen_Id int(8) not null,
+	Foreign key (Gen_id) references tb_Genero(Gen_Id),
+	Foreign key (Post_id) references tb_Postagem(Post_Id),
+	Primary Key (Post_Id, Gen_Id)		
+);
+
+insert into tb_InterGen values(1,2);
+insert into tb_InterGen values(2,1);
+
+Create table tb_InterAst
+(
+	Post_Id int(8) not null,
+	Ast_Id int(8) not null,
+	Foreign key (Post_id) references tb_Postagem(Post_Id),
+	Foreign key (Ast_id) references tb_Assunto(Ast_Id),
+	Primary Key (Post_Id, Ast_Id)
+);
+
+insert into tb_InterAst values(1,1);
+insert into tb_InterAst values(2,2);
+
+Create table tb_Comentario
+(
+	Coment_Id int(8) not null auto_increment,
+	User_Id int(8) not null,
+	Post_Id int(8) not null,
+	Coment_Data datetime not null,
+	Coment_Corpo text not null,
+	Foreign key (User_Id) references tb_Usuario(User_Id),
+	Foreign key (Post_Id) references tb_Postagem(Post_Id),
+	Primary key (Coment_Id)
+);
+
+insert into tb_comentario values(1,2,1,'2011-04-19','Eu gostei disso!');
+insert into tb_comentario values(2,1,2,'2009-07-18','Eu amei aquilo!');
+
+Create table tb_Tipo
+(
+	Tipo_Id int(8) not null auto_increment,
+	Tipo_Nome varchar(100) unique key not null,
+	Primary key (tipo_id)
+);
+
+insert into tb_tipo values(0,'Jogo de PC');
+insert into tb_tipo values(0,'Cards');
+
+Create table tb_FormasPagamento
+(
+	Pag_Id int(8) not null auto_increment,
+	Pag_Nome varchar(50) unique key not null,
+	Primary key (Pag_Id)
+);
+
+insert into tb_formaspagamento values(0,'Boleto');
+insert into tb_formaspagamento values(0,'Cartao');
+
+Create table tb_Anuncio
+(
+	Anu_Id int(8) not null auto_increment,
+	User_Id int(8) not null,
+	Tipo_Id int(8) not null,
+	Anu_Nome varchar(100) not null,
+	Anu_Descricao varchar(999) not null,
+	Img_Id int(8) not null,
+	Anu_Valor float not null,
+	Anu_QtdEstoque int not null,
+	Primary key (Anu_Id),
+	Foreign Key (User_Id) references tb_Usuario(User_Id),
+	Foreign key (Img_Id) references tb_Imagem(Img_Id),
+	Foreign Key (Tipo_Id) references tb_Tipo(Tipo_Id)	
+);
+
+
+Create table tb_InterAnuncio
+(
+	Anu_Id int(8) not null,
+	Pag_Id int(8) not null,
+	Primary Key (Anu_Id, Pag_Id),
+	Foreign Key (Anu_Id) references tb_Anuncio(Anu_Id),
+	Foreign Key (Pag_Id) references tb_FormasPagamento(Pag_Id)
+);
+
+Create table tb_Parceiro
+(
+	Par_Id int(8) not null,
+	Par_Nome varchar(100) not null,
+	Par_Logo varchar(300),
+	Par_Link varcar(300),
+	Primary Key (Par_Id)
+);
+
+insert into tb_Parceiro values(0,'Vida de Suporte');
+insert into tb_Parceiro values(0,'Bit coofe');
+insert into tb_Parceiro values(0,'Nerd Smile');
