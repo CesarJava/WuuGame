@@ -1,0 +1,40 @@
+public string BBCode(string strTextToReplace) 
+{ 
+    
+    ////Define regex 
+    Regex regExp; 
+    
+    ////Regex for URL tag without anchor 
+    regExp = new Regex(@"\[url\]([^\]]+)\[\/url\]"); 
+    strTextToReplace = regExp.Replace(strTextToReplace, "<a href=\"$1\">$1</a>"); 
+    
+    ////Regex for URL with anchor 
+    regExp = new Regex(@"\[url=([^\]]+)\]([^\]]+)\[\/url\]"); 
+    strTextToReplace = regExp.Replace(strTextToReplace, "<a href=\"$1\">$2</a>"); 
+    
+    ////Image regex 
+    regExp = new Regex(@"\[img\]([^\]]+)\[\/img\]"); 
+    strTextToReplace = regExp.Replace(strTextToReplace, "<img src=\"$1\" />"); 
+    
+    ////Bold text 
+    regExp = new Regex(@"\[b\](.+?)\[\/b\]"); 
+    strTextToReplace = regExp.Replace(strTextToReplace, "<b>$1</b>"); 
+    
+    ////Italic text 
+    regExp = new Regex(@"\[i\](.+?)\[\/i\]"); 
+    strTextToReplace = regExp.Replace(strTextToReplace, "<i>$1</i>"); 
+    
+    ////Underline text 
+    regExp = new Regex(@"\[u\](.+?)\[\/u\]"); 
+    strTextToReplace = regExp.Replace(strTextToReplace, "<u>$1</u>"); 
+    
+    ////Font size
+    regExp = new Regex(@"\[size=([^\]]+)\]([^\]]+)\[\/size\]");
+    strTextToReplace = regExp.Replace(strTextToReplace, "<span style=\"font-size: $1px\">$2</span>"); 
+    
+    ////Font color
+    regExp = new Regex(@"\[color=([^\]]+)\]([^\]]+)\[\/color\]");
+    strTextToReplace = regExp.Replace(strTextToReplace, "<span style=\"color: $1\">$2</span>");               
+    
+    return strTextToReplace; 
+}

@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WuuGames.Business", "Template_Site\WuuGames.Business\WuuGames.Business.csproj", "{D067DAB2-9EB2-4C18-8330-267BE1800389}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WuuGames.DAO", "Template_Site\WuuGames.DAO\WuuGames.DAO.csproj", "{68EC5BEF-3A47-4F81-89FE-7A115439F3A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WuuGames.Modelo", "Template_Site\WuuGames.Modelo\WuuGames.Modelo.csproj", "{03749F12-4513-4EE9-90DC-107C0937F180}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WuuGames.Visual", "Template_Site\WuuGames.Visual\", "{87DA91B8-2F84-448D-A6D4-245BBF0FE6F9}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		ProjectReferences = "{D067DAB2-9EB2-4C18-8330-267BE1800389}|WuGames.Business.dll;{68EC5BEF-3A47-4F81-89FE-7A115439F3A1}|WuGames.DAO.dll;{03749F12-4513-4EE9-90DC-107C0937F180}|WuGames.Modelo.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/WuuGames.Visual"
+		Debug.AspNetCompiler.PhysicalPath = "Template_Site\WuuGames.Visual\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\WuuGames.Visual\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/WuuGames.Visual"
+		Release.AspNetCompiler.PhysicalPath = "Template_Site\WuuGames.Visual\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\WuuGames.Visual\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "52195"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D067DAB2-9EB2-4C18-8330-267BE1800389}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D067DAB2-9EB2-4C18-8330-267BE1800389}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D067DAB2-9EB2-4C18-8330-267BE1800389}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D067DAB2-9EB2-4C18-8330-267BE1800389}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68EC5BEF-3A47-4F81-89FE-7A115439F3A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68EC5BEF-3A47-4F81-89FE-7A115439F3A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68EC5BEF-3A47-4F81-89FE-7A115439F3A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68EC5BEF-3A47-4F81-89FE-7A115439F3A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03749F12-4513-4EE9-90DC-107C0937F180}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03749F12-4513-4EE9-90DC-107C0937F180}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03749F12-4513-4EE9-90DC-107C0937F180}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03749F12-4513-4EE9-90DC-107C0937F180}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87DA91B8-2F84-448D-A6D4-245BBF0FE6F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87DA91B8-2F84-448D-A6D4-245BBF0FE6F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87DA91B8-2F84-448D-A6D4-245BBF0FE6F9}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{87DA91B8-2F84-448D-A6D4-245BBF0FE6F9}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

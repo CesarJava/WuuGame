@@ -1,0 +1,206 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Blue Marble Theme  - Free CSS Template</title>
+<meta name="keywords" content="blue, marble, design, theme, web, free templates, website templates, CSS, HTML" />
+<meta name="description" content="Blue Marble Theme is a free website template provided by templatemo.com" />
+<link href="templatemo_style.css" rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet" href="nivo-slider.css" type="text/css" media="screen" />
+<script src="js/jquery.min.js" type="text/javascript"></script>
+<script src="js/jquery.nivo.slider.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(window).load(function () {
+        $('#slider').nivoSlider({
+            effect: 'random',
+            slices: 15,
+            animSpeed: 600,
+            pauseTime: 2400,
+            startSlide: 0, //Set starting Slide (0 index)
+            directionNav: false,
+            directionNavHide: false, //Only show on hover
+            controlNav: false, //1,2,3...
+            controlNavThumbs: false, //Use thumbnails for Control Nav
+            pauseOnHover: true, //Stop animation while hovering
+            manualAdvance: false, //Force manual transitions
+            captionOpacity: 0.7, //Universal caption opacity
+            beforeChange: function () { },
+            afterChange: function () { },
+            slideshowEnd: function () { } //Triggers after all slides have been shown
+        });
+    });
+</script>
+    <style type="text/css">
+       
+       
+       
+        .divLogo
+        {
+            margin-right: 50px;
+            text-align: right;
+        }
+       
+       
+       
+        .Colaboradores
+        {
+            width: 121px;
+            height: 62px;
+        }
+       
+       
+       
+    </style>
+</head>
+<body>
+  <form id="form1" runat="server">
+    <div>
+  <div id="templatemo_header_wrapper">
+	<div id="templatemo_header">
+    
+    	<div id="site_title">
+            </div> 
+            <div class="div_Login" 
+            style="width: 178px; top: 23px; left: 1104px; height: 96px;">  
+                <asp:Label ID="lblUser" runat="server" Text="Login:"></asp:Label>
+                <asp:TextBox ID="txtboxUser" runat="server" BackColor="white" 
+                    ></asp:TextBox>
+&nbsp;
+                <asp:Label ID="lblSenha" runat="server" Text="Senha:"></asp:Label>
+                <asp:TextBox ID="txtboxSenha" runat="server" BackColor="white" 
+                    TextMode="Password"></asp:TextBox>
+&nbsp;&nbsp;&nbsp;
+                <asp:Button ID="btnLogar" runat="server" Text="Login" BackColor="#F0F0F0" 
+                    onclick="btnLogar_Click" />
+        &nbsp;
+                <asp:Button ID="btnSair" runat="server" Text="Sair" onclick="btnSair_Click1" 
+                    Visible="False" />
+        </div>
+        <div style="width: 412px; height: 107px; margin-left: 199px">
+            <asp:Image ID="Image1" runat="server" CssClass="divLogo" Height="110px" 
+                ImageUrl="~/images/gallery/logo_'.-variaçãopng.png" 
+                Width="400px" />
+        </div>            <!-- end of site_title -->
+        
+        <div id="templatemo_menu">
+            <ul>
+                <li><a href="Page_Home.aspx" class="current">Home</a></li>
+                <li><a href="Page_Anuncios.aspx?Tipo=Todos">Anuncios</a></li>
+                <li><a href="Page_Postagens.aspx?Genero=Todos"> Postagens</a></li>
+                <li><a href="Page_Contact.aspx">Contato</a></li>
+                <li><a href="Page_Novo_Usuario.aspx">Registrar</a></li>
+            </ul>    	
+        </div> <!-- end of templatemo_menu -->
+    
+    </div> <!-- end of header -->
+</div> <!-- end of header wrapper -->
+<div id="templatemo_sidebar">
+        	<div class="sidebar_box">
+            <br />
+                <span>Colaboradores:</span>
+                <br />
+				<a href="http://www.flashmo.com" target="_parent">
+                <img src="images/Colaboradores/ns_120x60.png" alt="banner" 
+                    class="Colaboradores" /></a>  
+                <a href="http://www.flashmo.com" target="_parent">
+                <img src="images/Colaboradores/BitCoffee_120x60.jpg" alt="banner" 
+                    class="Colaboradores" /></a> 
+                <a href="http://www.flashmo.com" target="_parent">
+                <img src="images/Colaboradores/Banner_Suporte_150.jpg" alt="banner" 
+                    class="Colaboradores" /></a> 
+                        
+                     </div>  
+        	
+<div class="sidebar_box">
+            	<h4>Categorias</h4>
+                <ul class="tmo_list">
+                    <li>
+                     <a href="Page_Postagens.aspx?Genero=<%=lblCatAcao.Text %>">  <asp:Label ID="lblCatAcao" runat="server" Text="Ação"></asp:Label></a>
+                    </li>
+                     <li>
+                       <a href="Page_Postagens.aspx?Genero=<%=lblCatAventura.Text %>">  <asp:Label ID="lblCatAventura" runat="server" Text="Aventura"></asp:Label></a>
+                    </li>
+                     <li>
+                       <a href="Page_Postagens.aspx?Genero=<%=Label5.Text %>">  <asp:Label ID="Label5" runat="server" Text="Terror"></asp:Label></a>
+                    </li>
+                     <li>
+                       <a href="Page_Postagens.aspx?Genero=<%=Label6.Text %>">  <asp:Label ID="Label6" runat="server" Text="Ficção Cientifica"></asp:Label></a>
+                    </li>
+                     <li>
+                       <a href="Page_Postagens.aspx?Genero=<%=Label7.Text %>">  <asp:Label ID="Label7" runat="server" Text="Arcade"></asp:Label></a>
+                    </li>
+                     <li>
+                       <a href="Page_Postagens.aspx?Genero=<%=Label8.Text %>">  <asp:Label ID="Label8" runat="server" Text="Estratégia"></asp:Label></a>
+                    </li>
+                     <li>
+                       <a href="Page_Postagens.aspx?Genero=<%=Label9.Text %>">  <asp:Label ID="Label9" runat="server" Text="Esportes"></asp:Label></a>
+                    </li>
+                     <li>
+                       <a href="Page_Postagens.aspx?Genero=<%=Label10.Text %>">  <asp:Label ID="Label10" runat="server" Text="Luta"></asp:Label></a>
+                    </li>
+                     <li>
+                       <a href="Page_Postagens.aspx?Genero=<%=Label20.Text %>">  <asp:Label ID="Label20" runat="server" Text="MMORPG"></asp:Label></a>
+                    </li>
+                     <li>
+                       <a href="Page_Postagens.aspx?Genero=<%=Label12.Text %>">  <asp:Label ID="Label12" runat="server" Text="Multi Player"></asp:Label></a>
+
+                    </li>
+                     <li>
+                       <a href="Page_Postagens.aspx?Genero=<%=Label3.Text %>">  <asp:Label ID="Label3" runat="server" Text="Raciocinio e Lógica"></asp:Label></a>
+                    </li>
+                     <li>
+                       <a href="Page_Postagens.aspx?Genero=<%=Label4.Text %>">  <asp:Label ID="Label4" runat="server" Text="RPG"></asp:Label></a>
+                    </li>
+                     <li>
+                      <a href="Page_Postagens.aspx?Genero=<%=Label11.Text %>">   <asp:Label ID="Label11" runat="server" Text="Simuladores"></asp:Label></a>
+                    </li>
+                                      
+
+                    
+                </ul>
+            </div>
+            
+        </div><asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server" 
+            >
+
+</asp:ContentPlaceHolder>
+  
+<div id="templatemo_footer_wrapper">
+	<div id="templatemo_footer">
+        
+    	<div class="footer_col_w300">
+            <h4>Nossas Págians</h4>
+            <ul class="tmo_list">
+                <li><a href="Page_Home.aspx">Home</a></li>
+                <li><a href="Page_Anuncios.aspx">Anuncios</a></li>
+                <li><a href="Page_Postagens.aspx">Postagens</a></li>
+                <li><a href="Page_Contact.aspx">Contato</a></li>
+                <li><a href="Page_CadastroUsuario.aspx">Registre-se Já</a></li>
+            </ul>            
+        </div>
+        
+        <div class="footer_col_w300">
+            <h4>Registre-se Já</h4>
+            <ul class="tmo_list">
+                <li><a href="Page_CadastroUsuario.aspx">Registrar</a></li>
+            </ul>            
+        </div>
+        
+        <div class="footer_col_w300 last">
+            <h4>Wü Games</h4>
+            <p>Um simples projeto feito em pouco tempo, mas com muito amor\o/</p>
+            <p>Copyright © 2048 <a href="#">Wü Games</a> <br /> <a href="Page_Home.aspx" target="_parent">Portal Wü Games </a> by <a href="Page_Home.apsx" target="_parent">Wü Group S/A</a></p>        
+        </div>
+    
+		<div class="cleaner"></div>
+    </div> <!-- end of templatemo_footer -->
+</div> <!-- end of templatemo_footer wrapper -->
+</div>
+    </form>
+</body>
+</html>

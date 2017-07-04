@@ -1,0 +1,468 @@
+﻿-- MySQL dump 10.13  Distrib 5.5.13, for Win64 (x86)
+--
+-- Host: localhost    Database: db_wugames
+-- ------------------------------------------------------
+-- Server version	5.5.13
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Current Database: `db_wugames`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `db_wugames` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `db_wugames`;
+
+--
+-- Table structure for table `tb_anuncio`
+--
+
+DROP TABLE IF EXISTS `tb_anuncio`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_anuncio` (
+  `Anu_Id` int(8) NOT NULL AUTO_INCREMENT,
+  `User_Id` int(8) NOT NULL,
+  `Tipo_Id` int(8) NOT NULL,
+  `Anu_Nome` varchar(100) NOT NULL,
+  `Anu_Descricao` varchar(999) NOT NULL,
+  `Img_Id` int(8) NOT NULL,
+  `Anu_Valor` float NOT NULL,
+  `Anu_QtdEstoque` int(11) NOT NULL,
+  PRIMARY KEY (`Anu_Id`),
+  KEY `User_Id` (`User_Id`),
+  KEY `Img_Id` (`Img_Id`),
+  KEY `Tipo_Id` (`Tipo_Id`),
+  CONSTRAINT `tb_anuncio_ibfk_1` FOREIGN KEY (`User_Id`) REFERENCES `tb_usuario` (`User_Id`),
+  CONSTRAINT `tb_anuncio_ibfk_2` FOREIGN KEY (`Img_Id`) REFERENCES `tb_imagem` (`Img_Id`),
+  CONSTRAINT `tb_anuncio_ibfk_3` FOREIGN KEY (`Tipo_Id`) REFERENCES `tb_tipo` (`Tipo_Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_anuncio`
+--
+
+LOCK TABLES `tb_anuncio` WRITE;
+/*!40000 ALTER TABLE `tb_anuncio` DISABLE KEYS */;
+INSERT INTO `tb_anuncio` VALUES (1,2,3,'Dados para RPG','V?rios modelos, cores e materiais.',16,2.5,142);
+/*!40000 ALTER TABLE `tb_anuncio` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_assunto`
+--
+
+DROP TABLE IF EXISTS `tb_assunto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_assunto` (
+  `Ast_Id` int(8) NOT NULL AUTO_INCREMENT,
+  `Ast_Nome` varchar(100) NOT NULL,
+  PRIMARY KEY (`Ast_Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_assunto`
+--
+
+LOCK TABLES `tb_assunto` WRITE;
+/*!40000 ALTER TABLE `tb_assunto` DISABLE KEYS */;
+INSERT INTO `tb_assunto` VALUES (1,'Dicas'),(2,'Detonado');
+/*!40000 ALTER TABLE `tb_assunto` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_comentario`
+--
+
+DROP TABLE IF EXISTS `tb_comentario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_comentario` (
+  `Coment_Id` int(8) NOT NULL AUTO_INCREMENT,
+  `User_Id` int(8) NOT NULL,
+  `Post_Id` int(8) NOT NULL,
+  `Coment_Data` datetime NOT NULL,
+  `Coment_Corpo` varchar(250) NOT NULL,
+  `Coment_VotoPos` int(11) DEFAULT '0',
+  `Coment_VotoNeg` int(11) DEFAULT '0',
+  PRIMARY KEY (`Coment_Id`),
+  KEY `User_Id` (`User_Id`),
+  KEY `Post_Id` (`Post_Id`),
+  CONSTRAINT `tb_comentario_ibfk_1` FOREIGN KEY (`User_Id`) REFERENCES `tb_usuario` (`User_Id`),
+  CONSTRAINT `tb_comentario_ibfk_2` FOREIGN KEY (`Post_Id`) REFERENCES `tb_postagem` (`Post_Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_comentario`
+--
+
+LOCK TABLES `tb_comentario` WRITE;
+/*!40000 ALTER TABLE `tb_comentario` DISABLE KEYS */;
+INSERT INTO `tb_comentario` VALUES (1,2,14,'2011-12-01 00:00:00','?timo jogo!',0,0),(2,2,6,'2011-12-01 00:00:00','?timo post!',0,0);
+/*!40000 ALTER TABLE `tb_comentario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_formaspagamento`
+--
+
+DROP TABLE IF EXISTS `tb_formaspagamento`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_formaspagamento` (
+  `Pag_Id` int(8) NOT NULL AUTO_INCREMENT,
+  `Pag_Nome` varchar(50) NOT NULL,
+  PRIMARY KEY (`Pag_Id`),
+  UNIQUE KEY `Pag_Nome` (`Pag_Nome`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_formaspagamento`
+--
+
+LOCK TABLES `tb_formaspagamento` WRITE;
+/*!40000 ALTER TABLE `tb_formaspagamento` DISABLE KEYS */;
+INSERT INTO `tb_formaspagamento` VALUES (1,'Cart?o'),(2,'Dep?sito Banc?rio'),(3,'Troca');
+/*!40000 ALTER TABLE `tb_formaspagamento` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_genero`
+--
+
+DROP TABLE IF EXISTS `tb_genero`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_genero` (
+  `Gen_Id` int(8) NOT NULL AUTO_INCREMENT,
+  `Gen_Nome` varchar(100) NOT NULL,
+  PRIMARY KEY (`Gen_Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_genero`
+--
+
+LOCK TABLES `tb_genero` WRITE;
+/*!40000 ALTER TABLE `tb_genero` DISABLE KEYS */;
+INSERT INTO `tb_genero` VALUES (1,'Aventura'),(2,'RPG'),(3,'Acao'),(4,'Arcade'),(5,'Corrida'),(6,'Esportes'),(7,'Estrategia'),(8,'Ficcao Cientifica'),(9,'Infantil'),(10,'Luta'),(11,'MMORPG'),(12,'Simuladores'),(13,'Multi Player'),(14,'Terror');
+/*!40000 ALTER TABLE `tb_genero` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_imagem`
+--
+
+DROP TABLE IF EXISTS `tb_imagem`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_imagem` (
+  `Img_Id` int(8) NOT NULL AUTO_INCREMENT,
+  `Img_Nome` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`Img_Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_imagem`
+--
+
+LOCK TABLES `tb_imagem` WRITE;
+/*!40000 ALTER TABLE `tb_imagem` DISABLE KEYS */;
+INSERT INTO `tb_imagem` VALUES (1,'Img1.jpg'),(2,'Img2.jpg'),(3,'Madara__s_Mangekyou_Sharingan_by_ZmeiatPC.jpg'),(4,'Beach.jpg'),(5,'Eagle & Waterfall.jpg'),(6,'Graphic3.jpg'),(7,'bambu.jpg'),(8,'IMG_0009.JPG'),(9,'sharingan.gif'),(10,'Dark Knight.jpg'),(11,'Dark Knight.jpg'),(12,'Dark Knight.jpg'),(13,'4.png'),(14,'firewire.png'),(15,'SoC.jpg'),(16,'DadosRPG.jpg'),(17,'mario.jpg'),(18,'qquercoisa.jpg'),(19,'qquercoisa.jpg'),(20,'Wü Games - Skull.jpg'),(21,'The-Elder-Scrolls-V-Skyrim-1680x1050-Widescreen-Wallpaper3.jpg'),(22,'Wü Games - Skull.jpg');
+/*!40000 ALTER TABLE `tb_imagem` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_interanuncio`
+--
+
+DROP TABLE IF EXISTS `tb_interanuncio`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_interanuncio` (
+  `Anu_Id` int(8) NOT NULL,
+  `Pag_Id` int(8) NOT NULL,
+  PRIMARY KEY (`Anu_Id`,`Pag_Id`),
+  KEY `Pag_Id` (`Pag_Id`),
+  CONSTRAINT `tb_interanuncio_ibfk_1` FOREIGN KEY (`Anu_Id`) REFERENCES `tb_anuncio` (`Anu_Id`),
+  CONSTRAINT `tb_interanuncio_ibfk_2` FOREIGN KEY (`Pag_Id`) REFERENCES `tb_formaspagamento` (`Pag_Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_interanuncio`
+--
+
+LOCK TABLES `tb_interanuncio` WRITE;
+/*!40000 ALTER TABLE `tb_interanuncio` DISABLE KEYS */;
+INSERT INTO `tb_interanuncio` VALUES (1,1),(1,2);
+/*!40000 ALTER TABLE `tb_interanuncio` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_interast`
+--
+
+DROP TABLE IF EXISTS `tb_interast`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_interast` (
+  `Post_Id` int(8) NOT NULL,
+  `Ast_Id` int(8) NOT NULL,
+  PRIMARY KEY (`Post_Id`,`Ast_Id`),
+  KEY `Ast_Id` (`Ast_Id`),
+  CONSTRAINT `tb_interast_ibfk_1` FOREIGN KEY (`Post_Id`) REFERENCES `tb_postagem` (`Post_Id`),
+  CONSTRAINT `tb_interast_ibfk_2` FOREIGN KEY (`Ast_Id`) REFERENCES `tb_assunto` (`Ast_Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_interast`
+--
+
+LOCK TABLES `tb_interast` WRITE;
+/*!40000 ALTER TABLE `tb_interast` DISABLE KEYS */;
+INSERT INTO `tb_interast` VALUES (1,1),(6,1),(11,1),(2,2);
+/*!40000 ALTER TABLE `tb_interast` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_intergen`
+--
+
+DROP TABLE IF EXISTS `tb_intergen`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_intergen` (
+  `Post_Id` int(8) NOT NULL,
+  `Gen_Id` int(8) NOT NULL,
+  PRIMARY KEY (`Post_Id`,`Gen_Id`),
+  KEY `Gen_Id` (`Gen_Id`),
+  CONSTRAINT `tb_intergen_ibfk_1` FOREIGN KEY (`Gen_Id`) REFERENCES `tb_genero` (`Gen_Id`),
+  CONSTRAINT `tb_intergen_ibfk_2` FOREIGN KEY (`Post_Id`) REFERENCES `tb_postagem` (`Post_Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_intergen`
+--
+
+LOCK TABLES `tb_intergen` WRITE;
+/*!40000 ALTER TABLE `tb_intergen` DISABLE KEYS */;
+INSERT INTO `tb_intergen` VALUES (2,1),(13,1),(1,2),(6,2),(14,2),(11,3),(11,5),(12,7);
+/*!40000 ALTER TABLE `tb_intergen` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_mensagem`
+--
+
+DROP TABLE IF EXISTS `tb_mensagem`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_mensagem` (
+  `Msg_Id` int(8) NOT NULL AUTO_INCREMENT,
+  `User_1` int(8) NOT NULL,
+  `User_2` int(8) NOT NULL,
+  `TpMsg_Id` int(8) NOT NULL,
+  `Msg_Ast` varchar(100) NOT NULL,
+  `Msg_Texto` text NOT NULL,
+  `Data` date NOT NULL,
+  PRIMARY KEY (`Msg_Id`),
+  KEY `User_1` (`User_1`),
+  KEY `User_2` (`User_2`),
+  KEY `TpMsg_Id` (`TpMsg_Id`),
+  CONSTRAINT `tb_mensagem_ibfk_1` FOREIGN KEY (`User_1`) REFERENCES `tb_usuario` (`User_Id`),
+  CONSTRAINT `tb_mensagem_ibfk_2` FOREIGN KEY (`User_2`) REFERENCES `tb_usuario` (`User_Id`),
+  CONSTRAINT `tb_mensagem_ibfk_3` FOREIGN KEY (`TpMsg_Id`) REFERENCES `tb_tipomensagem` (`TpMsg_Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_mensagem`
+--
+
+LOCK TABLES `tb_mensagem` WRITE;
+/*!40000 ALTER TABLE `tb_mensagem` DISABLE KEYS */;
+INSERT INTO `tb_mensagem` VALUES (9,2,1,1,'dfafdas','fdasfasdfdas','2011-11-29'),(10,1,1,1,'asfdasd','dsafdasfds','2011-11-29'),(11,1,2,1,'fsdgdf','dasfdasfasdf','0000-00-00'),(12,2,5,1,'eu','oi','2011-11-30');
+/*!40000 ALTER TABLE `tb_mensagem` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_nivelacesso`
+--
+
+DROP TABLE IF EXISTS `tb_nivelacesso`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_nivelacesso` (
+  `NivelAcesso_Id` int(1) NOT NULL AUTO_INCREMENT,
+  `NivelAcesso_Nome` varchar(20) NOT NULL,
+  PRIMARY KEY (`NivelAcesso_Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_nivelacesso`
+--
+
+LOCK TABLES `tb_nivelacesso` WRITE;
+/*!40000 ALTER TABLE `tb_nivelacesso` DISABLE KEYS */;
+INSERT INTO `tb_nivelacesso` VALUES (1,'Usuario'),(2,'Administrador');
+/*!40000 ALTER TABLE `tb_nivelacesso` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_postagem`
+--
+
+DROP TABLE IF EXISTS `tb_postagem`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_postagem` (
+  `Post_Id` int(8) NOT NULL AUTO_INCREMENT,
+  `User_Id` int(8) NOT NULL,
+  `Post_Titulo` varchar(100) NOT NULL,
+  `Post_Subtitulo` varchar(200) NOT NULL,
+  `Post_Conteudo` varchar(25000) NOT NULL,
+  `Post_VotoPos` int(11) DEFAULT '0',
+  `Post_VotoNeg` int(11) DEFAULT '0',
+  `Post_Data` datetime NOT NULL,
+  `Img_Id` int(8) NOT NULL,
+  PRIMARY KEY (`Post_Id`),
+  UNIQUE KEY `Post_Titulo` (`Post_Titulo`),
+  KEY `User_Id` (`User_Id`),
+  KEY `Img_Id` (`Img_Id`),
+  CONSTRAINT `tb_postagem_ibfk_1` FOREIGN KEY (`User_Id`) REFERENCES `tb_usuario` (`User_Id`),
+  CONSTRAINT `tb_postagem_ibfk_2` FOREIGN KEY (`Img_Id`) REFERENCES `tb_imagem` (`Img_Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_postagem`
+--
+
+LOCK TABLES `tb_postagem` WRITE;
+/*!40000 ALTER TABLE `tb_postagem` DISABLE KEYS */;
+INSERT INTO `tb_postagem` VALUES (1,1,'Post 1','Primeiro Post','Este e o primeiro post',7,1,'2011-11-21 00:00:00',2),(2,2,'Post 2','Segundo Post','Este e o segundo post',6,4,'2011-11-21 00:00:00',1),(3,1,'Detonado God Of War 5','ta longe de chegar','troll face ?????',0,0,'2011-11-28 12:01:14',6),(11,5,'dasda','sdadasd','adsfdasf',0,0,'2011-11-29 04:26:44',10),(12,5,'Postei sem poder!','*troll face*','sou um hacker. ^^',0,0,'2011-11-29 09:33:51',13),(13,5,'mais uma vez... nao pode isso','haha','fadsfa',0,0,'2011-11-30 04:12:21',14),(14,5,'Shadow of the Colossus','Para todos aqueles que gostam do jogo, uma an?lise feita pela equipe W?Games. Para aqueles que n?o conhecem, a chance ? agora.','\r\n\r\nShadow of the Colossus ? um jogo desenvolvido para o ps2 (Playstation 2), \r\n\r\nO jogo se passa em um mundo de fantasia, mais exatamente numa peninsula, n?o povoada, conhecida como Forbidden Land (Regi?o Proibida)\r\n\r\nVoc? controle Wanda, um jovem que vai at? essa regi?o com o intuito de reviver sua amada, mono, o game n?o cita detalhes de sua morte, acompanhando voc? em sua jornada esta Agro, seu leal cavalo.\r\n\r\nAo acessar a regi?o pro?bida pelas montanhas do norte, o jovem perssonagem se direciona para um templo, localizado no centro do territ?rio, l? ele entra em contato com um ser m?stico Dormin.\r\n\r\nDizem as lendas que Dormin tem o poder de ressucitar os mortos, assim que chega l?, wanda ? incubido por dormin a destruir 16 colossos que abitam aquelas terras, se ele assim o fizer, dormin ressucitar? sua amada.\r\n\r\nOs colossus contra os quais voc? ter? que enfrentar s?o criaturas enormes, com formas variadas mas ? poss?vel identificar tra?os de animais ou human?ides, alguns portam armaduras e armas, outros n?o, eles aparecer?o das mais variadas formas, voando no ar, andando sobre o mar, ou simplesmente parados no meio de um vale, seus corpos s?o uma mistura de partes org?nicas e inorg?nicas como por exemplo pelos, rochas ou projetos arquiteonicos, algumas dessas feras ir?o ignorar wanda a menos que ele os ataque, enquanto outros n?o pensam duas vezes antes de proteger seu territ?rio, ap?s a derrota os colossos ir?o permanecer no local em que cairam como um monte de terra e rochas.\r\n\r\nPara encontrar essas criaturas, wanda conta com a espada dos anci?os , uma espada que ir? direcionar raios de luz na dire??o do colosso, possibilitando assim descobrir o paradeiro da criatura.\r\n\r\nMas nem tudo ? t?o simples quanto parece. Mesmo com a ajuda da espada as veses voc? ir? perder muitos minutos at? conseguir encontrar o colosso, isso se deve ao fato de que  shadow of the colossus tem um dos maiores mapas produzidos para o ps2, sem os famosos loadings de tela para tela, uma vez com ogame carregado voc? ir? andar pelo mundo inteiro, e n?o precisar? carregar o cen?rio mais.\r\n\r\nO mapa de shadow of the colossus conta com uma grande variedade de territ?rio tamb?m, voc? dever? atravessar desertos, montanhas rochosas, longas planicies, lagos e florestas at? conseguir encontrar um colosso.\r\n\r\nE quando encontrar n?o pense que as coisas ser?o mais simples, de fato 51% da dificuldade acredito eu estar em encontrar as criaturas, mas isso n?o faz com que os mesmos sejam simples de derrotar, oc? precisar? de uma estratag?ia para cada colosso.\r\n\r\nPara come?ar, eles fazem juz ao nome, muitos, para n?o dizer todos, ter?o que ser escalados at? que voc? possa dar algum dano no mesmo, alem disso, voc? deve ferir pontos espec?ficos na criatura, identificados por ideogramas na pele da mesma, se voc? nao os ferir nesses pontos, voc? n?o ir? derrota-los.\r\n\r\nAlguns colossos possuem mais de um ponto vital, e este muda para um lugar mais dificil quando voc? tira mais da metade da vida do colosso, enquanto em alguns casos voc? dever? escalar pelas pernas do animal, em outros dever? calcular o momento correto para pular e se agarrar as asas de um deles, ou ent?o ser agil o suficiente para pular de plataforma em plataforma sem ser pego.\r\n\r\nAs lutas com os colossos s?o exaustivas, no sentido de dar orgulho quando voc? derrota um deles, e voc? certamente se sentir? melhor quando isso acontecer.\r\n\r\nAp?s a derrota uma energia sai do colosso, e entra no seu corpo, no come?o n?o parece ser nada, mas conforme o jogo avan?a voc? come?a a perceber que esta ficando tudo mais escuro e sombrio, e come?a a se perguntar se o que esta fazendo realmente ? a melhor op??o.\r\n\r\nDurante o jogo voc? n?o escutar? nenhum som, exceto pelos cascos de Agro batento no ch?o ou o vento uivando, e isso refor?a a sensa??o de solid?o que Wanda tem, j? nos momentos de lutas contra os colossos voc? pode escutar m?sicas  que o faz lembrar que a cada derrota voc? esta mais perto de salvar sua amada.\r\n\r\nDormin ? um show a parte, a entidade do templo ? dublada por dois atores, uma voz masculina e feminina da vida a criatura, e nos faz sentir a impress?o de um ser poderoso, ressaltando que as vozes masulina e feminina falam ao mesmo tempo, dando uma imensa sensa??o de poder e superioridade, alem da esfera sinistra adicionada pela distor??o da voz.\r\n\r\nOs graficos por?m n?o s?o excelentes, existem momentos em que se encontrar?o pontas nos personagens, ou momentos em que os frames caem drasticamente na tela, mas nada que n?o seja compensado pelas qualidades acima citadas.\r\n\r\nFinalizando, ? muito dif?cil trazer para as palavras a senssa??o de se jogar shadow of the colossus, esse game tem realmente uma fantastia experiencia e voc? com certeza ir? se impressionar com o brilhante final desenvolvido pelos criadores,sem sombra de duvidas esse ? um dos games mais fantasticos inventados para esta plataforma e se voc? n?o o experimentou o a aconselho a fazer isto j?.\r\n\r\n',0,0,'2011-12-01 10:40:21',15);
+/*!40000 ALTER TABLE `tb_postagem` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_tipo`
+--
+
+DROP TABLE IF EXISTS `tb_tipo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_tipo` (
+  `Tipo_Id` int(8) NOT NULL AUTO_INCREMENT,
+  `Tipo_Nome` varchar(100) NOT NULL,
+  PRIMARY KEY (`Tipo_Id`),
+  UNIQUE KEY `Tipo_Nome` (`Tipo_Nome`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_tipo`
+--
+
+LOCK TABLES `tb_tipo` WRITE;
+/*!40000 ALTER TABLE `tb_tipo` DISABLE KEYS */;
+INSERT INTO `tb_tipo` VALUES (2,'Cards'),(6,'Cartas'),(1,'Jogo de PC'),(5,'Jogos'),(4,'Objeto'),(3,'Vestuario');
+/*!40000 ALTER TABLE `tb_tipo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_tipomensagem`
+--
+
+DROP TABLE IF EXISTS `tb_tipomensagem`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_tipomensagem` (
+  `TpMsg_Id` int(8) NOT NULL AUTO_INCREMENT,
+  `TpMsg_Nome` varchar(100) NOT NULL,
+  PRIMARY KEY (`TpMsg_Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_tipomensagem`
+--
+
+LOCK TABLES `tb_tipomensagem` WRITE;
+/*!40000 ALTER TABLE `tb_tipomensagem` DISABLE KEYS */;
+INSERT INTO `tb_tipomensagem` VALUES (1,'Privativa'),(2,'Negociacao');
+/*!40000 ALTER TABLE `tb_tipomensagem` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_usuario`
+--
+
+DROP TABLE IF EXISTS `tb_usuario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_usuario` (
+  `User_Id` int(8) NOT NULL AUTO_INCREMENT,
+  `User_Nome` varchar(100) NOT NULL,
+  `User_Login` varchar(100) NOT NULL,
+  `User_Senha` varchar(100) NOT NULL,
+  `User_Email` varchar(100) NOT NULL,
+  `User_RG` varchar(9) NOT NULL,
+  `User_CPF` varchar(11) DEFAULT NULL,
+  `User_DataNasc` date NOT NULL,
+  `User_Pontos` int(11) DEFAULT '0',
+  `Img_Id` int(8) NOT NULL,
+  `User_Advertencias` int(1) DEFAULT '0',
+  `NivelAcesso_Id` int(1) NOT NULL,
+  PRIMARY KEY (`User_Id`),
+  UNIQUE KEY `User_Login` (`User_Login`),
+  UNIQUE KEY `User_Email` (`User_Email`),
+  UNIQUE KEY `User_RG` (`User_RG`),
+  UNIQUE KEY `User_CPF` (`User_CPF`),
+  KEY `Img_Id` (`Img_Id`),
+  KEY `tb_usuaroi_ibfk_2` (`NivelAcesso_Id`),
+  CONSTRAINT `tb_usuario_ibfk_1` FOREIGN KEY (`Img_Id`) REFERENCES `tb_imagem` (`Img_Id`),
+  CONSTRAINT `tb_usuaroi_ibfk_2` FOREIGN KEY (`NivelAcesso_Id`) REFERENCES `tb_nivelacesso` (`NivelAcesso_Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_usuario`
+--
+
+LOCK TABLES `tb_usuario` WRITE;
+/*!40000 ALTER TABLE `tb_usuario` DISABLE KEYS */;
+INSERT INTO `tb_usuario` VALUES (2,'Cesar','Cesaros','321','cesar@gmail.com','987654321','10987654321','1995-08-10',100,2,0,1),(3,'Thiago Recheter','Recheter220','102938','thiagorecheter@hotmail.com','402343177','24902743841','1995-04-14',0,18,0,1),(5,'Administrador','Administrador','Devitto','primeiroerro@hotmail.com','324435546','23456789012','2011-11-20',123,1,1,2),(1,'CONTA APAGADA','CONTA APAGADA','1029384756','FrozenHell@hotmail.com','19','1999','2011-11-30',0,1,0,1),(6,'cesar','cesarosrei','cesar','ceas@ces.com','398536958','54776465868','2011-01-01',0,20,0,1);
+/*!40000 ALTER TABLE `tb_usuario` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2011-12-01 16:34:28
